@@ -1,0 +1,179 @@
+{% extends "base_admin.html" %}
+
+{% block title %}Manage Skills{% endblock %}
+{% block page_title %}Skills{% endblock %}
+{% block page_subtitle %}Add and manage your developer skills{% endblock %}
+
+{% block content %}
+
+<div style="display:grid;grid-template-columns:340px 1fr;gap:1.5rem;align-items:start;">
+
+  <!-- ── Add Skill Form ──────────────────────────────────────── -->
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">
+        <i class="fas fa-plus" style="color:var(--gold);margin-right:0.5rem;"></i>
+        Add New Skill
+      </h2>
+    </div>
+
+    <form method="POST" action="{{ url_for('admin.add_skill') }}">
+
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label class="form-label" for="name">Skill Name *</label>
+        <input class="form-input" type="text" id="name" name="name"
+               placeholder="e.g. Python" required>
+      </div>
+
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label class="form-label" for="icon">Font Awesome Icon Class</label>
+        <input class="form-input" type="text" id="icon" name="icon"
+               placeholder="e.g. fab fa-python"
+               value="fas fa-code">
+        <small style="color:var(--muted);font-size:0.75rem;margin-top:0.3rem;display:block;">
+          Find icons at
+          <a href="https://fontawesome.com/icons" target="_blank"
+             style="color:var(--gold);text-decoration:none;">fontawesome.com/icons</a>
+        </small>
+      </div>
+
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label class="form-label" for="category">Category</label>
+        <select class="form-select" id="category" name="category">
+          <option value="Frontend">Frontend</option>
+          <option value="Backend">Backend</option>
+          <option value="Database">Database</option>
+          <option value="Tools">Tools</option>
+          <option value="CMS">CMS</option>
+          <option value="Mobile">Mobile</option>
+          <option value="General">General</option>
+        </select>
+      </div>
+
+      <div class="form-group" style="margin-bottom:1.5rem;">
+        <label class="form-label" for="level">Proficiency Level: <span id="level-display">80</span>%</label>
+        <div class="range-group">
+          <input type="range" id="level" name="level"
+                 min="10" max="100" value="80"
+                 oninput="document.getElementById('level-display').textContent = this.value">
+          <span class="range-val" id="range-val">80%</span>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%;">
+        <i class="fas fa-plus"></i> Add Skill
+      </button>
+    </form>
+  </div>
+
+  <!-- ── Skills Table ─────────────────────────────────────────── -->
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">
+        <i class="fas fa-star" style="color:var(--gold);margin-right:0.5rem;"></i>
+        All Skills ({{ skills|length }})
+      </h2>
+    </div>
+
+    {% if skills %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Skill</th>
+            <th>Category</th>
+            <th>Level</th>
+            <th>Icon</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for skill in skills %}
+          <tr>
+            <td>
+              <div style="display:flex;align-items:center;gap:0.6rem;">
+                <div style="
+                  width:32px;height:32px;border-radius:8px;
+                  background:var(--gold-dim);
+                  display:flex;align-items:center;justify-content:center;
+                  color:var(--gold);font-size:0.9rem;">
+                  <i class="{{ skill.icon }}"></i>
+                </div>
+                <strong>{{ skill.name }}</strong>
+              </div>
+            </td>
+
+            <td>
+              {% set cat_colors = {
+                'Frontend': 'badge-blue',
+                'Backend':  'badge-green',
+                'Database': 'badge-gold',
+                'Tools':    'badge-gray',
+                'CMS':      'badge-red',
+                'Mobile':   'badge-red',
+              } %}
+              <span class="badge {{ cat_colors.get(skill.category, 'badge-gray') }}">
+                {{ skill.category }}
+              </span>
+            </td>
+
+            <td>
+              <div style="display:flex;align-items:center;gap:0.6rem;">
+                <div style="
+                  flex:1;height:6px;background:var(--bg);
+                  border-radius:3px;min-width:80px;">
+                  <div style="
+                    height:100%;
+                    width:{{ skill.level }}%;
+                    background:linear-gradient(90deg,var(--gold),#e8c060);
+                    border-radius:3px;
+                    transition:width 0.6s ease;"></div>
+                </div>
+                <span style="font-size:0.8rem;color:var(--gold);font-weight:600;
+                             font-family:'Syne',sans-serif;">{{ skill.level }}%</span>
+              </div>
+            </td>
+
+            <td style="color:var(--muted);font-size:0.8rem;font-family:monospace;">
+              {{ skill.icon }}
+            </td>
+
+            <td>
+              <form method="POST"
+                    action="{{ url_for('admin.delete_skill', sid=skill.id) }}"
+                    onsubmit="return confirm('Delete {{ skill.name }}?')">
+                <button type="submit" class="btn btn-danger btn-sm">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+      <div style="text-align:center;padding:3rem;color:var(--muted);">
+        <i class="fas fa-star" style="font-size:2.5rem;display:block;margin-bottom:0.75rem;opacity:0.3;"></i>
+        No skills yet. Add your first skill!
+      </div>
+    {% endif %}
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // Keep range display in sync
+  const range = document.getElementById("level");
+  const rangeVal = document.getElementById("range-val");
+  const levelDisplay = document.getElementById("level-display");
+
+  range.addEventListener("input", function() {
+    rangeVal.textContent = this.value + "%";
+    levelDisplay.textContent = this.value;
+  });
+</script>
+{% endblock %}

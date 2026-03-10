@@ -1,0 +1,114 @@
+{% extends "base_admin.html" %}
+
+{% block title %}Messages{% endblock %}
+{% block page_title %}Messages{% endblock %}
+{% block page_subtitle %}Contact form submissions from your portfolio visitors{% endblock %}
+
+{% block content %}
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">
+      <i class="fas fa-envelope" style="color:var(--gold);margin-right:0.5rem;"></i>
+      All Messages ({{ messages|length }})
+    </h2>
+  </div>
+
+  {% if messages %}
+  <div style="display:flex;flex-direction:column;gap:1rem;">
+    {% for msg in messages %}
+    <div style="
+      background: var(--bg);
+      border: 1px solid {{ 'rgba(224,92,92,0.3)' if not msg.is_read else 'var(--border)' }};
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      transition: border-color 0.2s;
+      {% if not msg.is_read %}border-left: 3px solid var(--danger);{% endif %}
+    ">
+      <!-- Message Header -->
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;margin-bottom:0.75rem;">
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <!-- Avatar -->
+          <div style="
+            width:42px;height:42px;border-radius:50%;
+            background:linear-gradient(135deg,var(--gold),#8b6914);
+            display:flex;align-items:center;justify-content:center;
+            font-family:'Syne',sans-serif;font-weight:700;color:#fff;
+            font-size:1rem;flex-shrink:0;">
+            {{ (msg.name or 'U')[0]|upper }}
+          </div>
+          <div>
+            <div style="font-weight:600;">{{ msg.name }}</div>
+            <a href="mailto:{{ msg.email }}"
+               style="font-size:0.82rem;color:var(--gold);text-decoration:none;">
+              {{ msg.email }}
+            </a>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <span style="font-size:0.78rem;color:var(--muted);">
+            <i class="far fa-clock"></i>
+            {{ msg.created_at[:16] if msg.created_at else '' }}
+          </span>
+          {% if not msg.is_read %}
+            <span class="badge badge-red">New</span>
+          {% else %}
+            <span class="badge badge-gray">Read</span>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Message Body -->
+      <div style="
+        background:var(--surface);
+        border-radius:8px;
+        padding:1rem;
+        color:var(--text2);
+        font-size:0.9rem;
+        line-height:1.7;
+        margin-bottom:1rem;
+        border-left:3px solid var(--border);
+      ">
+        {{ msg.message }}
+      </div>
+
+      <!-- Actions -->
+      <div style="display:flex;gap:0.6rem;">
+        <a href="mailto:{{ msg.email }}?subject=Re: Your portfolio message"
+           class="btn btn-outline btn-sm">
+          <i class="fas fa-reply"></i> Reply
+        </a>
+
+        {% if not msg.is_read %}
+        <form method="POST" action="{{ url_for('admin.mark_read', mid=msg.id) }}">
+          <button type="submit" class="btn btn-success btn-sm">
+            <i class="fas fa-check"></i> Mark as Read
+          </button>
+        </form>
+        {% endif %}
+
+        <form method="POST"
+              action="{{ url_for('admin.delete_message', mid=msg.id) }}"
+              onsubmit="return confirm('Permanently delete this message?')">
+          <button type="submit" class="btn btn-danger btn-sm">
+            <i class="fas fa-trash"></i> Delete
+          </button>
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% else %}
+    <div style="text-align:center;padding:4rem 2rem;color:var(--muted);">
+      <i class="fas fa-inbox" style="font-size:3rem;display:block;margin-bottom:1rem;opacity:0.3;"></i>
+      <p style="font-size:1.1rem;margin-bottom:0.5rem;">No messages yet</p>
+      <p style="font-size:0.875rem;">
+        Messages from your portfolio contact form will appear here.
+      </p>
+    </div>
+  {% endif %}
+</div>
+
+{% endblock %}

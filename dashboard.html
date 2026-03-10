@@ -1,0 +1,138 @@
+{% extends "base_admin.html" %}
+
+{% block title %}Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+{% block page_subtitle %}Here's what's happening with your portfolio{% endblock %}
+
+{% block topbar_action %}
+  <a href="{{ url_for('admin.add_project') }}" class="topbar-btn">
+    <i class="fas fa-plus"></i> Add Project
+  </a>
+{% endblock %}
+
+{% block content %}
+
+<!-- ── Stats Grid ─────────────────────────────────────────────── -->
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-icon gold"><i class="fas fa-folder-open"></i></div>
+    <div>
+      <div class="stat-value">{{ stats.total_projects }}</div>
+      <div class="stat-label">Total Projects</div>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon blue"><i class="fas fa-star"></i></div>
+    <div>
+      <div class="stat-value">{{ stats.total_skills }}</div>
+      <div class="stat-label">Skills Listed</div>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon green"><i class="fas fa-envelope"></i></div>
+    <div>
+      <div class="stat-value">{{ stats.total_messages }}</div>
+      <div class="stat-label">Total Messages</div>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon red"><i class="fas fa-bell"></i></div>
+    <div>
+      <div class="stat-value">{{ stats.unread_messages }}</div>
+      <div class="stat-label">Unread Messages</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Two-Column Layout ──────────────────────────────────────── -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+
+  <!-- Recent Messages -->
+  <div class="card" style="grid-column:1 / -1;">
+    <div class="card-header">
+      <h2 class="card-title"><i class="fas fa-envelope" style="color:var(--gold);margin-right:0.5rem;"></i>Recent Messages</h2>
+      <a href="{{ url_for('admin.view_messages') }}" class="btn btn-outline btn-sm">View All</a>
+    </div>
+
+    {% if messages %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Sender</th>
+            <th>Email</th>
+            <th>Preview</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for msg in messages %}
+          <tr>
+            <td><strong>{{ msg.name }}</strong></td>
+            <td style="color:var(--muted);">{{ msg.email }}</td>
+            <td style="color:var(--text2);max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+              {{ msg.message[:80] }}{{ '...' if msg.message|length > 80 }}
+            </td>
+            <td style="color:var(--muted);white-space:nowrap;">{{ msg.created_at[:10] if msg.created_at else '' }}</td>
+            <td>
+              {% if msg.is_read %}
+                <span class="badge badge-gray">Read</span>
+              {% else %}
+                <span class="badge badge-red">New</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+      <p style="text-align:center;padding:2rem;color:var(--muted);">
+        <i class="fas fa-inbox" style="font-size:2rem;margin-bottom:0.5rem;display:block;"></i>
+        No messages yet
+      </p>
+    {% endif %}
+  </div>
+
+</div>
+
+<!-- ── Quick Actions ──────────────────────────────────────────── -->
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1.5rem;">
+  <a href="{{ url_for('admin.add_project') }}" class="card" style="text-decoration:none;display:flex;align-items:center;gap:1rem;transition:border-color 0.2s,transform 0.2s;cursor:pointer;" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+    <div class="stat-icon gold"><i class="fas fa-plus"></i></div>
+    <div>
+      <div style="font-weight:600;">Add Project</div>
+      <div style="font-size:0.8rem;color:var(--muted);">Showcase new work</div>
+    </div>
+  </a>
+  <a href="{{ url_for('admin.manage_skills') }}" class="card" style="text-decoration:none;display:flex;align-items:center;gap:1rem;transition:border-color 0.2s,transform 0.2s;cursor:pointer;" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+    <div class="stat-icon blue"><i class="fas fa-star"></i></div>
+    <div>
+      <div style="font-weight:600;">Manage Skills</div>
+      <div style="font-size:0.8rem;color:var(--muted);">Add or remove skills</div>
+    </div>
+  </a>
+  <a href="{{ url_for('admin.view_messages') }}" class="card" style="text-decoration:none;display:flex;align-items:center;gap:1rem;transition:border-color 0.2s,transform 0.2s;cursor:pointer;" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+    <div class="stat-icon green"><i class="fas fa-envelope"></i></div>
+    <div>
+      <div style="font-weight:600;">View Messages</div>
+      <div style="font-size:0.8rem;color:var(--muted);">
+        {% if stats.unread_messages > 0 %}
+          <span style="color:var(--danger);">{{ stats.unread_messages }} unread</span>
+        {% else %}
+          All caught up!
+        {% endif %}
+      </div>
+    </div>
+  </a>
+  <a href="/" target="_blank" class="card" style="text-decoration:none;display:flex;align-items:center;gap:1rem;transition:border-color 0.2s,transform 0.2s;cursor:pointer;" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+    <div class="stat-icon red"><i class="fas fa-globe"></i></div>
+    <div>
+      <div style="font-weight:600;">View Portfolio</div>
+      <div style="font-size:0.8rem;color:var(--muted);">See the live site</div>
+    </div>
+  </a>
+</div>
+
+{% endblock %}

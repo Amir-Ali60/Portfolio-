@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Alex Morgan — Full Stack Developer Portfolio"/>
+  <title>Amir Ali — Full Stack Developer</title>
+
+  <!-- Google Fonts: Cormorant Garamond (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Syne+Mono&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       NAVIGATION
+  ══════════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+
+      <!-- Logo -->
+      <a href="#hero" class="nav-logo">
+        <span class="logo-bracket">&lt;</span>Amir<span class="logo-accent">.</span>Ali<span class="logo-bracket">/&gt;</span>
+      </a>
+
+      <!-- Desktop Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about"        class="nav-link">About</a></li>
+        <li><a href="#skills"       class="nav-link">Skills</a></li>
+        <li><a href="#projects"     class="nav-link">Projects</a></li>
+        <li><a href="#services"     class="nav-link">Services</a></li>
+        <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+        <li><a href="#contact"      class="nav-link">Contact</a></li>
+      </ul>
+
+      <!-- Right Controls -->
+      <div class="nav-controls">
+        <!-- Dark/Light Mode Toggle -->
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+          <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+        <!-- Hire Me CTA -->
+        <a href="#contact" class="btn-hire">Hire Me</a>
+        <!-- Mobile Menu Toggle -->
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <!-- ══════════════════════════════════════════════
+       HERO SECTION
+  ══════════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <!-- Background decorations -->
+    <div class="hero-grid"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+
+    <div class="hero-container">
+
+      <!-- Left — Text Content -->
+      <div class="hero-content">
+        <div class="hero-badge reveal">
+          <span class="badge-dot"></span>
+          Available for Work
+        </div>
+
+        <h1 class="hero-title reveal">
+          Hi, I'm <br/>
+          <em>Amir Ali</em>
+        </h1>
+
+        <div class="hero-role reveal">
+          <span class="role-line"></span>
+          <span class="role-text" id="typingText">MERN Stack Developer</span>
+          <span class="cursor">|</span>
+        </div>
+
+        <p class="hero-bio reveal">
+          I craft elegant, high-performance web applications — from pixel-perfect
+          frontends to robust backends. Passionate about clean code, thoughtful
+          design, and building things that matter.
+        </p>
+
+        <div class="hero-actions reveal">
+          <a href="#projects" class="btn btn-primary">
+            <i class="fas fa-folder-open"></i> View Projects
+          </a>
+          <a href="#" class="btn btn-outline" download>
+            <i class="fas fa-download"></i> Download CV
+          </a>
+        </div>
+
+        <!-- Quick stats -->
+        <div class="hero-stats reveal">
+          <div class="stat">
+            <span class="stat-num">2+</span>
+            <span class="stat-label">Years Exp.</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num">27+</span>
+            <span class="stat-label">Projects</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num">19+</span>
+            <span class="stat-label">Clients</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right — Photo / Decorative Card -->
+      <div class="hero-visual reveal">
+        <div class="hero-card">
+          <div class="hero-img-wrap">
+            <img src="images/profile.jpg" alt="Alex Morgan"
+                 onerror="this.src='images/placeholder-profile.svg'"/>
+          </div>
+          <!-- Floating Tech Badges -->
+          <div class="float-badge badge-python">
+            <i class="fab fa-python"></i> Python
+          </div>
+          <div class="float-badge badge-react">
+            <i class="fab fa-react"></i> React
+          </div>
+          <div class="float-badge badge-flask">
+            <i class="fas fa-flask"></i> Flask
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Scroll indicator -->
+    <a href="#about" class="scroll-indicator">
+      <span>Scroll down</span>
+      <div class="scroll-arrow"><i class="fas fa-chevron-down"></i></div>
+    </a>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════
+       ABOUT SECTION
+  ══════════════════════════════════════════════ -->
+  <section class="section about-section" id="about">
+    <div class="container">
+
+      <div class="about-grid">
+
+        <!-- Left — Image -->
+        <div class="about-img-wrap reveal">
+          <div class="about-img-inner">
+            <img src="images/about.jpg" alt="About Alex"
+                 onerror="this.src='images/placeholder-about.svg'"/>
+            <!-- Experience badge overlay -->
+            <div class="exp-badge">
+              <span class="exp-num">5+</span>
+              <span class="exp-text">Years of<br/>Experience</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right — Text -->
+        <div class="about-text">
+          <div class="section-tag reveal">About Me</div>
+          <h2 class="section-title reveal">
+            A Developer Who Loves<br/>
+            <em>Building Things</em>
+          </h2>
+          <p class="about-para reveal">
+            I'm a full stack developer based in San Francisco, specializing in
+            building scalable web applications with Python, Flask, and modern
+            JavaScript frameworks. I love turning complex problems into simple,
+            beautiful, and intuitive designs.
+          </p>
+          <p class="about-para reveal">
+            When I'm not coding, you'll find me hiking trails, reading tech
+            blogs, or contributing to open source projects. I believe great
+            software is a blend of good engineering and empathy for the user.
+          </p>
+
+          <!-- Info grid -->
+          <div class="about-info reveal">
+            <div class="info-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>San Francisco, CA</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-graduation-cap"></i>
+              <span>B.Sc. Computer Science</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-briefcase"></i>
+              <span>Open to Full-Time & Freelance</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-language"></i>
+              <span>English, Spanish</span>
+            </div>
+          </div>
+
+          <div class="about-actions reveal">
+            <a href="#contact" class="btn btn-primary">
+              <i class="fas fa-paper-plane"></i> Get in Touch
+            </a>
+            <div class="social-links">
+              <a href="#" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+              <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════
+       SKILLS SECTION
+  ══════════════════════════════════════════════ -->
+  <section class="section skills-section" id="skills">
+    <div class="container">
+
+      <div class="section-head reveal">
+        <div class="section-tag">What I Know</div>
+        <h2 class="section-title">My <em>Skills</em></h2>
+        <p class="section-sub">Technologies and tools I work with daily</p>
+      </div>
+
+      <!-- Skills are loaded from the database via JavaScript -->
+      <div id="skillsGrid" class="skills-grid">
+        <!-- Loading skeleton -->
+        <div class="skills-loading">
+          <i class="fas fa-circle-notch fa-spin"></i> Loading skills...
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════
+       PROJECTS SECTION
+  ══════════════════════════════════════════════ -->
+  <section class="section projects-section" id="projects">
+    <div class="container">
+
+      <div class="section-head reveal">
+        <div class="section-tag">My Work</div>
+        <h2 class="section-title">Featured <em>Projects</em></h2>
+        <p class="section-sub">A selection of things I've built recently</p>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="filter-bar reveal">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+        <button class="filter-btn" data-filter="frontend">Frontend</button>
+        <button class="filter-btn" data-filter="backend">Backend</button>
+      </div>
+
+      <!-- Projects Grid (loaded from DB via JS) -->
+      <div id="projectsGrid" class="projects-grid">
+        <div class="projects-loading">
+          <i class="fas fa-circle-notch fa-spin"></i> Loading projects...
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════
+       SERVICES SECTION
+  ══════════════════════════════════════════════ -->
+  <section class="section services-section" id="services">
+    <div class="container">
+
+      <div class="section-head reveal">
+        <div class="section-tag">What I Offer</div>
+        <h2 class="section-title">My <em>Services</em></h2>
+        <p class="section-sub">End-to-end solutions tailored to your needs</p>
+      </div>
+
+      <div class="services-grid">
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <i class="fas fa-paint-brush"></i>
+          </div>
+          <h3>UI/UX Design</h3>
+          <p>Beautiful, intuitive interfaces designed with users in mind. I craft wireframes, prototypes, and polished final designs.</p>
+          <ul class="service-list">
+            <li>Responsive Design</li>
+            <li>Design Systems</li>
+            <li>Prototyping</li>
+          </ul>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <i class="fas fa-code"></i>
+          </div>
+          <h3>Frontend Development</h3>
+          <p>Pixel-perfect, performant frontends using modern HTML, CSS, JavaScript, and React.</p>
+          <ul class="service-list">
+            <li>React / Vanilla JS</li>
+            <li>CSS Animations</li>
+            <li>Performance Optimization</li>
+          </ul>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <i class="fas fa-server"></i>
+          </div>
+          <h3>Backend Development</h3>
+          <p>Secure, scalable APIs and server-side logic built with Python and Flask.</p>
+          <ul class="service-list">
+            <li>REST APIs</li>
+            <li>Database Design</li>
+            <li>Authentication & Security</li>
+          </ul>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <i class="fas fa-database"></i>
+          </div>
+          <h3>Database Architecture</h3>
+          <p>Efficient database design and optimization using SQLite, MySQL, and PostgreSQL.</p>
+          <ul class="service-list">
+            <li>Schema Design</li>
+            <li>Query Optimization</li>
+            <li>Data Migrations</li>
+          </ul>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <i class="fab fa-wordpress"></i>
+          </div>
+          <h3>WordPress Development</h3>
+          <p>Custom themes, plugins, and high-converting websites on the world's most popular CMS.</p>
+          <ul class="service-list">
+            <li>Custom Themes</li>
+            <li>Plugin Development</li>
+            <li>WooCommerce</li>
+          </ul>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <i class="fas fa-cloud"></i>
+          </div>
+          <h3>Deployment & DevOps</h3>
+          <p>From development to production — CI/CD, Docker, and cloud deployment on AWS/GCP.</p>
+          <ul class="service-list">
+            <li>Docker & Docker Compose</li>
+            <li>CI/CD Pipelines</li>
+            <li>Cloud Deployment</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════
+       TESTIMONIALS SECTION
+  ══════════════════════════════════════════════ -->
+  <section class="section testimonials-section" id="testimonials">
+    <div class="container">
+
+      <div class="section-head reveal">
+        <div class="section-tag">Kind Words</div>
+        <h2 class="section-title">Client <em>Reviews</em></h2>
+        <p class="section-sub">What people say about working with me</p>
+      </div>
+
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">
+            "Alex built our entire e-commerce platform from scratch. The code
+            was clean, well-documented, and delivered ahead of schedule. Absolutely
+            outstanding work."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">S</div>
+            <div>
+              <strong>Sarah Johnson</strong>
+              <span>CEO, TechStore Inc.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">
+            "Incredibly talented developer. Transformed our outdated website into
+            a beautiful, fast, modern application. Communication was excellent
+            throughout the project."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">M</div>
+            <div>
+              <strong>Marcus Chen</strong>
+              <span>Founder, StartupXYZ</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">
+            "Alex is my go-to developer for any Flask project. Deep expertise,
+            great eye for design, and always delivers high-quality, maintainable code."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">L</div>
+            <div>
+              <strong>Lena Fischer</strong>
+              <span>CTO, DataFlow GmbH</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════
+       CONTACT SECTION
+  ══════════════════════════════════════════════ -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+
+      <div class="section-head reveal">
+        <div class="section-tag">Get in Touch</div>
+        <h2 class="section-title">Let's <em>Work Together</em></h2>
+        <p class="section-sub">Have a project in mind? Let's talk about it.</p>
+      </div>
+
+      <div class="contact-grid">
+
+        <!-- Contact Info -->
+        <div class="contact-info reveal">
+          <h3>Let's build something great</h3>
+          <p>
+            Whether you need a full web application, a quick landing page,
+            or just want to say hello — my inbox is always open.
+          </p>
+
+          <div class="contact-details">
+            <div class="contact-detail-item">
+              <div class="detail-icon"><i class="fas fa-envelope"></i></div>
+              <div>
+                <span class="detail-label">Email</span>
+                <a href="mailto:alex@example.com">alex@example.com</a>
+              </div>
+            </div>
+            <div class="contact-detail-item">
+              <div class="detail-icon"><i class="fas fa-phone"></i></div>
+              <div>
+                <span class="detail-label">Phone</span>
+                <a href="tel:+14155552671">+1 (415) 555-2671</a>
+              </div>
+            </div>
+            <div class="contact-detail-item">
+              <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div>
+                <span class="detail-label">Location</span>
+                <span>San Francisco, CA</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="social-links" style="margin-top:2rem;">
+            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form-wrap reveal">
+          <form class="contact-form" id="contactForm">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contactName">Your Name</label>
+                <input type="text" id="contactName" name="name"
+                       placeholder="John Doe" required/>
+              </div>
+              <div class="form-group">
+                <label for="contactEmail">Email Address</label>
+                <input type="email" id="contactEmail" name="email"
+                       placeholder="john@example.com" required/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contactMessage">Message</label>
+              <textarea id="contactMessage" name="message" rows="5"
+                        placeholder="Tell me about your project..."
+                        required></textarea>
+            </div>
+
+            <!-- Status message (shown after submit) -->
+            <div id="formStatus" class="form-status" style="display:none;"></div>
+
+            <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+          <a href="#hero" class="nav-logo">
+            <span class="logo-bracket">&lt;</span>Alex<span class="logo-accent">.</span>dev<span class="logo-bracket">/&gt;</span>
+          </a>
+          <p>Full Stack Developer crafting elegant web experiences with Python, Flask, and modern JavaScript.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="footer-links">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">UI/UX Design</a></li>
+            <li><a href="#services">Frontend Dev</a></li>
+            <li><a href="#services">Backend Dev</a></li>
+            <li><a href="#services">WordPress</a></li>
+            <li><a href="#services">DevOps</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <p><i class="fas fa-envelope"></i> alex@example.com</p>
+          <p><i class="fas fa-phone"></i> +1 (415) 555-2671</p>
+          <p><i class="fas fa-map-marker-alt"></i> San Francisco, CA</p>
+          <a href="/admin/login" class="admin-link">
+            <i class="fas fa-lock"></i> Admin
+          </a>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Alex Morgan. Crafted with <i class="fas fa-heart" style="color:#e05c5c;"></i> and Flask.</p>
+        <p>Built with Python · Flask · SQLite · Vanilla JS</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript -->
+  <script src="js/script.js"></script>
+</body>
+</html>

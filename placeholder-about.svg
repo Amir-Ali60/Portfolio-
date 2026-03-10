@@ -1,0 +1,6 @@
+<svg width="420" height="500" xmlns="http://www.w3.org/2000/svg">
+  <rect width="420" height="500" fill="#191928"/>
+  <rect x="0" y="0" width="420" height="500" fill="none" stroke="#c9a84c" stroke-width="2" stroke-dasharray="8,4" opacity="0.4"/>
+  <text x="50%" y="48%" font-family="sans-serif" font-size="16" fill="#c9a84c" text-anchor="middle" dominant-baseline="middle" opacity="0.7">About Photo</text>
+  <text x="50%" y="60%" font-family="sans-serif" font-size="12" fill="#c9a84c" text-anchor="middle" opacity="0.4">420x500</text>
+</svg>

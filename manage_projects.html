@@ -1,0 +1,136 @@
+{% extends "base_admin.html" %}
+
+{% block title %}Manage Projects{% endblock %}
+{% block page_title %}Projects{% endblock %}
+{% block page_subtitle %}Manage all your portfolio projects{% endblock %}
+
+{% block topbar_action %}
+  <a href="{{ url_for('admin.add_project') }}" class="topbar-btn">
+    <i class="fas fa-plus"></i> Add Project
+  </a>
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">
+      <i class="fas fa-folder-open" style="color:var(--gold);margin-right:0.5rem;"></i>
+      All Projects ({{ projects|length }})
+    </h2>
+  </div>
+
+  {% if projects %}
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Project</th>
+          <th>Category</th>
+          <th>Technologies</th>
+          <th>Featured</th>
+          <th>Links</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in projects %}
+        <tr>
+          <td style="color:var(--muted);">{{ loop.index }}</td>
+
+          <td>
+            <div style="display:flex;align-items:center;gap:0.75rem;">
+              <div style="
+                width:44px;height:44px;border-radius:8px;
+                background:var(--bg);border:1px solid var(--border);
+                overflow:hidden;flex-shrink:0;">
+                <img src="/{{ p.image }}" alt="{{ p.title }}"
+                     style="width:100%;height:100%;object-fit:cover;"
+                     onerror="this.src='/images/placeholder.jpg'">
+              </div>
+              <div>
+                <div style="font-weight:500;">{{ p.title }}</div>
+                <div style="font-size:0.78rem;color:var(--muted);max-width:240px;
+                            overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+                  {{ p.description[:60] }}...
+                </div>
+              </div>
+            </div>
+          </td>
+
+          <td>
+            {% set cat_badge = {
+              'fullstack': 'badge-gold',
+              'frontend':  'badge-blue',
+              'backend':   'badge-green',
+              'mobile':    'badge-red',
+              'other':     'badge-gray'
+            } %}
+            <span class="badge {{ cat_badge.get(p.category, 'badge-gray') }}">
+              {{ p.category }}
+            </span>
+          </td>
+
+          <td style="color:var(--muted);font-size:0.82rem;max-width:200px;
+                     overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+            {{ p.technologies }}
+          </td>
+
+          <td>
+            {% if p.featured %}
+              <span class="badge badge-gold">⭐ Yes</span>
+            {% else %}
+              <span class="badge badge-gray">No</span>
+            {% endif %}
+          </td>
+
+          <td>
+            <div style="display:flex;gap:0.4rem;">
+              {% if p.github_url and p.github_url != '#' %}
+                <a href="{{ p.github_url }}" target="_blank"
+                   class="btn btn-outline btn-sm" title="GitHub">
+                  <i class="fab fa-github"></i>
+                </a>
+              {% endif %}
+              {% if p.live_url and p.live_url != '#' %}
+                <a href="{{ p.live_url }}" target="_blank"
+                   class="btn btn-outline btn-sm" title="Live Demo">
+                  <i class="fas fa-external-link-alt"></i>
+                </a>
+              {% endif %}
+            </div>
+          </td>
+
+          <td>
+            <div style="display:flex;gap:0.5rem;">
+              <a href="{{ url_for('admin.edit_project', project_id=p.id) }}"
+                 class="btn btn-outline btn-sm">
+                <i class="fas fa-pen"></i> Edit
+              </a>
+              <form method="POST"
+                    action="{{ url_for('admin.delete_project', project_id=p.id) }}"
+                    onsubmit="return confirm('Delete {{ p.title }}? This cannot be undone.')">
+                <button type="submit" class="btn btn-danger btn-sm">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <div style="text-align:center;padding:4rem 2rem;color:var(--muted);">
+      <i class="fas fa-folder-open" style="font-size:3rem;margin-bottom:1rem;display:block;opacity:0.4;"></i>
+      <p style="font-size:1.1rem;margin-bottom:1rem;">No projects yet</p>
+      <a href="{{ url_for('admin.add_project') }}" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Add Your First Project
+      </a>
+    </div>
+  {% endif %}
+</div>
+
+{% endblock %}

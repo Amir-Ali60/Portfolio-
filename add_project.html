@@ -1,0 +1,120 @@
+{% extends "base_admin.html" %}
+
+{% block title %}{{ 'Edit' if project else 'Add' }} Project{% endblock %}
+{% block page_title %}{{ 'Edit' if project else 'Add' }} Project{% endblock %}
+{% block page_subtitle %}{{ 'Update project details' if project else 'Add a new project to your portfolio' }}{% endblock %}
+
+{% block topbar_action %}
+  <a href="{{ url_for('admin.manage_projects') }}" class="topbar-btn">
+    <i class="fas fa-arrow-left"></i> Back to Projects
+  </a>
+{% endblock %}
+
+{% block content %}
+
+<div style="max-width:860px;">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">
+        <i class="fas fa-{{ 'pen' if project else 'plus' }}" style="color:var(--gold);margin-right:0.5rem;"></i>
+        {{ 'Edit: ' + project.title if project else 'New Project' }}
+      </h2>
+    </div>
+
+    <form method="POST"
+          action="{{ url_for('admin.edit_project', project_id=project.id) if project else url_for('admin.add_project') }}">
+
+      <div class="form-grid">
+
+        <!-- Title -->
+        <div class="form-group">
+          <label class="form-label" for="title">Project Title *</label>
+          <input class="form-input" type="text" id="title" name="title"
+                 placeholder="e.g. E-Commerce Platform"
+                 value="{{ project.title if project else '' }}" required>
+        </div>
+
+        <!-- Category -->
+        <div class="form-group">
+          <label class="form-label" for="category">Category</label>
+          <select class="form-select" id="category" name="category">
+            <option value="fullstack" {{ 'selected' if project and project.category == 'fullstack' }}>Full Stack</option>
+            <option value="frontend"  {{ 'selected' if project and project.category == 'frontend'  }}>Frontend</option>
+            <option value="backend"   {{ 'selected' if project and project.category == 'backend'   }}>Backend</option>
+            <option value="mobile"    {{ 'selected' if project and project.category == 'mobile'    }}>Mobile</option>
+            <option value="other"     {{ 'selected' if project and project.category == 'other'     }}>Other</option>
+          </select>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group full">
+          <label class="form-label" for="description">Description *</label>
+          <textarea class="form-textarea" id="description" name="description"
+                    placeholder="Describe what the project does, what problems it solves..."
+                    rows="4" required>{{ project.description if project else '' }}</textarea>
+        </div>
+
+        <!-- Technologies -->
+        <div class="form-group full">
+          <label class="form-label" for="technologies">Technologies Used</label>
+          <input class="form-input" type="text" id="technologies" name="technologies"
+                 placeholder="e.g. React, Flask, SQLite, Stripe API  (comma-separated)"
+                 value="{{ project.technologies if project else '' }}">
+        </div>
+
+        <!-- Image Path -->
+        <div class="form-group full">
+          <label class="form-label" for="image">Image Path</label>
+          <input class="form-input" type="text" id="image" name="image"
+                 placeholder="e.g. images/project1.jpg  or  https://example.com/img.png"
+                 value="{{ project.image if project else 'images/placeholder.jpg' }}">
+          <small style="color:var(--muted);font-size:0.78rem;margin-top:0.25rem;">
+            Place image files in <code style="background:var(--bg);padding:0.1rem 0.4rem;border-radius:4px;">frontend/images/</code>
+            and enter the relative path above.
+          </small>
+        </div>
+
+        <!-- GitHub URL -->
+        <div class="form-group">
+          <label class="form-label" for="github_url">GitHub URL</label>
+          <input class="form-input" type="url" id="github_url" name="github_url"
+                 placeholder="https://github.com/username/repo"
+                 value="{{ project.github_url if project else '' }}">
+        </div>
+
+        <!-- Live URL -->
+        <div class="form-group">
+          <label class="form-label" for="live_url">Live Demo URL</label>
+          <input class="form-input" type="url" id="live_url" name="live_url"
+                 placeholder="https://yourproject.com"
+                 value="{{ project.live_url if project else '' }}">
+        </div>
+
+        <!-- Featured Checkbox -->
+        <div class="form-group full">
+          <div class="checkbox-wrap">
+            <input type="checkbox" id="featured" name="featured"
+                   {{ 'checked' if project and project.featured }}>
+            <label for="featured">
+              ⭐ Feature this project (shown first / highlighted on portfolio)
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-{{ 'save' if project else 'plus' }}"></i>
+          {{ 'Update Project' if project else 'Add Project' }}
+        </button>
+        <a href="{{ url_for('admin.manage_projects') }}" class="btn btn-outline">
+          Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

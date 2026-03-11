@@ -1,3 +1,4 @@
-# Only Flask is required — sqlite3 is built into Python!
-# Install with: pip install flask
-Flask>=2.0
+Flask
+gunicorn
+flask-login
+flask-sqlalchemy

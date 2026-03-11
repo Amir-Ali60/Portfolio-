@@ -41,6 +41,9 @@ if __name__ == "__main__":
     init_db()
     seed_db()
     print("\n🚀 Server started!")
-    print("   Portfolio  →  http://localhost:5000")
-    print("   Admin      →  http://localhost:5000/admin/login\n")
-    app.run(debug=True, port=5000)
+
+    # Render automatically PORT environment variable provide karta hai
+    port = int(os.environ.get("PORT", 5000))
+
+    # 0.0.0.0 host = external access allowed
+    app.run(host="0.0.0.0", port=port)

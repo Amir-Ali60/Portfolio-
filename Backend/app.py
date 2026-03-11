@@ -14,6 +14,8 @@ Default admin: username=admin  password=admin123
 
 from flask import Flask, send_from_directory
 import os
+with app.app_context():
+    db.create_all()
 
 # ── Create app ────────────────────────────────────────────────────────────────
 app = Flask(__name__, template_folder="templates", static_folder="static")

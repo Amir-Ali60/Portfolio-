@@ -22,6 +22,10 @@ app.config["SECRET_KEY"] = "change-this-secret-key-in-production-2024"
 from routes import api_bp, admin_bp
 app.register_blueprint(api_bp,   url_prefix="/api")
 app.register_blueprint(admin_bp, url_prefix="/admin")
+from models import init_db, seed_db
+    init_db()
+    seed_db()
+    print("\n🚀 Server started!")
 
 # ── Serve Frontend Files ──────────────────────────────────────────────────────
 FRONTEND_DIR = os.path.join(os.path.dirname(__file__), "..", "frontend")
@@ -36,11 +40,7 @@ def serve_static(filename):
 
 # ── Start ─────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
-    from models import init_db, seed_db
-    init_db()
-    seed_db()
-    print("\n🚀 Server started!")
-
+    
     # Render automatically PORT environment variable provide karta hai
     port = int(os.environ.get("PORT", 5000))
 

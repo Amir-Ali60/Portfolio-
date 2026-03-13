@@ -104,12 +104,12 @@
 
           <td>
             <div style="display:flex;gap:0.5rem;">
-              <a href="{{ url_for('admin.edit_project', project_id=p.id) }}"
+              <a href="{{ url_for('admin.edit_project', pid=p.id) }}"
                  class="btn btn-outline btn-sm">
                 <i class="fas fa-pen"></i> Edit
               </a>
               <form method="POST"
-                    action="{{ url_for('admin.delete_project', project_id=p.id) }}"
+                    action="{{ url_for('admin.delete_project', pid=p.id) }}"
                     onsubmit="return confirm('Delete {{ p.title }}? This cannot be undone.')">
                 <button type="submit" class="btn btn-danger btn-sm">
                   <i class="fas fa-trash"></i>
